@@ -1,0 +1,42 @@
+node{
+ def mavenHome = tool name : "maven3.9.8"
+echo "GitHub BranchName: ${env.BRANCH_NAME}"
+    echo "Jenkins Job Number: ${env.BUILD_NUMBER}"
+	echo "Jenkins Node Name: ${env.NODE_NAME}"
+	echo "Jenkins Home: ${env.JENKINS_HOME}"
+	echo "Jenkins URL: ${env.JENKINS_URL}"
+	echo "Job name: ${env.JOB_NMAE}"
+ 
+ stage('SCM Checkout')  
+ {
+  git credentialsId: '38efded7-cd45-4282-9e03-19a51bf26a45', url: 'https://github.com/5G-Devops/maven-web-application.git'
+ }
+ stage('Build') 
+ {
+  sh"${mavenHome}/bin/mvn clean package"     
+ }
+ stage('Generate sonar report')
+ {
+  sh"${mavenHome}/bin/mvn clean sonar:sonar"
+ }
+ stage('Upload artifact into Nexus')
+ {
+ sh"${mavenHome}/bin/mvn clean deploy"     
+ }
+ stage('Deploy the package on tomcat')
+{
+ sshagent(['e1bfb6b0-c180-491d-9fb2-b9b23e77b46d']) {
+ sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@16.171.25.114:/opt/apache-tomcat-9.0.89/webapps/"
+}    
+}
+ stage('Email Notification')
+ {
+ emailext body: '''Hi Team,
+
+Build Over!!
+
+
+Regards,
+DevOps''', subject: 'Build Over!!', to: 'dvpsdmndmn@gmail.com'    
+ }
+}
