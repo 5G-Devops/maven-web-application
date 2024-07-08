@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        stage(){
+        stage('GitCheckOut'){
             steps{
              git credentialsId: 'bfae41d1-3a6d-4f7e-a346-0018f6d1cd56', url: 'https://github.com/5G-Devops/maven-web-application.git'   
             }
