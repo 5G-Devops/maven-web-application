@@ -1,4 +1,5 @@
 @Library('jenkins-library') _
+
 pipeline{
     agent any
     tools{
@@ -12,8 +13,7 @@ pipeline{
         }
         stage('UnitTest'){
             steps{
-                scripts{
-                    unittest()
+                unittest()
                 }
             }
         }
