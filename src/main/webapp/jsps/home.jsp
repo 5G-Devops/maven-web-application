@@ -9,8 +9,8 @@
 </head>
 </head>
 <body>
-<h1 align="center">Welcome to Mithun Technologies Private Ltd. Ph No:+91-9900012028,Bengaluru,Karnataka,India</h1>
-<h1 align="center"> Very Good Training center for DevOps.Teaching Real Time</h1>
+<h1 align="center">Welcome to Mithun Technologies Private Ltd.Bengaluru,Karnataka,India</h1>
+<h1 align="center"> Very Good DevOps Center.Teaching Real Time</h1>
 <hr>
 <br>
 	<h1><h3> Server Side IP Address </h3><br>
