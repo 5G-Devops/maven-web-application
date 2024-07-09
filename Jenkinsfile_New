@@ -15,7 +15,7 @@ pipeline{
              git credentialsId: '264b3661-c46d-4418-916d-68769b652c6c', url: 'https://github.com/5G-Devops/maven-web-application.git'   
             }
         }
-        stage('UnitTest'){
+        stage('MavenUnitTest'){
             when { expression { params.action == 'create' } }
             steps{
                 unittest()
@@ -25,6 +25,13 @@ pipeline{
             when { expression { params.action == 'create' } }
             steps{
               mvnintegrationTest()
+            }
+
+        }
+        stage('StaticCodeAnalysis'){
+            steps{
+                staticcodeanalysis()
+
             }
 
         }
