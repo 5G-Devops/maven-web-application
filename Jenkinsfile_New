@@ -6,7 +6,7 @@ pipeline{
         maven'maven3.9.8'
     }
     parameters{
-        choice(name: 'action',choices: 'create/ndestroy',description:'choose create/destory')
+        choice(name: 'action',choices: 'create\ndestroy',description:'choose create/destory')
     }
     stages{
         stage('GitCheckOut'){
