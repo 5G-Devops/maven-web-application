@@ -75,6 +75,13 @@ pipeline{
             }
 
         }
+        stage('DockerScanUsingTrivy'){
+            steps{
+                script{
+                    imageScan("${params.repositoryname}","${params.imagename}","${params.imagetag}")
+                }
+            }
+        }
         
         }
     }
