@@ -7,6 +7,9 @@ pipeline{
     }
     parameters{
         choice(name: 'action', choices: 'create\ndelete', description: 'choose create/destory')
+        string(name: 'repositoryname', description: 'Pass the repository details', defaultValue: 'radhagowthamhub')
+        string(name: 'imagename', description: 'Pass the image name', defaultValue: 'maven-web-app')
+        string(name: 'iamgetag', description: 'pass the image tag', defaultValue: 'v1')
     }
     stages{
         stage('GitCheckOut'){
@@ -54,6 +57,14 @@ pipeline{
             steps{
                 script{
                     MvenBuild()
+                }
+            }
+
+        }
+        stage('DockerBuild'){
+            steps{
+                script{
+                    dockerBuild("${params.repositoryname}","${params.imagename}","${params.imagetag}")
                 }
             }
 
