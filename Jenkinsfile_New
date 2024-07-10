@@ -31,7 +31,13 @@ pipeline{
             }
 
         }
-        // Here the jenkins sent src code to sonarqube server for code coverage
+        stage('mavenbuild'){
+            steps{
+                sh "mvn clean package"
+            }
+
+        }
+  /*      // Here the jenkins sent src code to sonarqube server for code coverage
         stage('StaticCodeAnalysis'){
             when { expression { params.action == 'create' } }
             steps{
@@ -60,7 +66,7 @@ pipeline{
                 }
             }
 
-        }
+        } */
         stage('DockerBuild'){
             steps{
                 script{
