@@ -42,8 +42,21 @@ pipeline{
 // Now the sonarqube server will send the qualitydate status to the jenkins, for this we have to configure the jenkins url in sonarqube 
 // sonarqube>adminstration>configuration>webhook>jenkins url/sonarqube-webhook/>create
         stage('qualitygateStatus'){
-            def credentialsId = 'sonar-api'
-           QualitygateStatus(credentialsId) 
+            steps{
+                script{
+                    def credentialsId = 'sonar-api'
+                       QualitygateStatus(credentialsId)
+                }
+            }
+             
+        }
+        stage('MavenBuild'){
+            steps{
+                script{
+                    MvenBuild()
+                }
+            }
+
         }
         
         }
