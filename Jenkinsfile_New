@@ -31,8 +31,10 @@ pipeline{
         stage('StaticCodeAnalysis'){
             when { expression { params.action == 'create' } }
             steps{
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
-                staticcodeanalysis()
+                withSonarQubeEnv(credentialsId: 'sonar-api') {
+                   staticcodeanalysis()
+               }
+                
 
             }
 
