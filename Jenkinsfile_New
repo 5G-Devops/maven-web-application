@@ -31,11 +31,8 @@ pipeline{
         stage('StaticCodeAnalysis'){
             when { expression { params.action == 'create' } }
             steps{
-                withSonarQubeEnv(credentialsId: 'sonar-api') {
-                   staticcodeanalysis()
-               }
-                
-
+                def sonarcredentialsId = 'sonar-api'
+                   staticcodeanalysis(sonarcredentialsId)
             }
 
         }
