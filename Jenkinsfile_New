@@ -82,6 +82,14 @@ pipeline{
                 }
             }
         }
+        stage('dockerImagePush'){
+            steps{
+                script{
+                    imagePush("${params.repositoryname}","${params.imagename}","${params.imagetag}")
+                }
+            }
+
+        }
         
         }
     }
