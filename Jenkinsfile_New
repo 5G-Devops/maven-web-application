@@ -28,6 +28,7 @@ pipeline{
             }
 
         }
+        // Here the jenkins sent src code to sonarqube server for code coverage
         stage('StaticCodeAnalysis'){
             when { expression { params.action == 'create' } }
             steps{
@@ -37,6 +38,12 @@ pipeline{
              }
             }
 
+        }
+// Now the sonarqube server will send the qualitydate status to the jenkins, for this we have to configure the jenkins url in sonarqube 
+// sonarqube>adminstration>configuration>webhook>jenkins url/sonarqube-webhook/>create
+        stage('qualitygateStatus'){
+            def credentialsId = 'sonar-api'
+           QualitygateStatus(credentialsId) 
         }
         
         }
