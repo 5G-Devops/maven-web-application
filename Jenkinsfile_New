@@ -77,14 +77,14 @@ pipeline{
             }
 
         }
-        stage('DockerScanUsingTrivy'){
+       /* stage('DockerScanUsingTrivy'){
             when { expression { params.action == 'create' } }
             steps{
                 script{
                     imageScan("${params.repositoryname}","${params.imagename}","${params.imagetag}")
                 }
             }
-        }
+        }*/
         stage('dockerImagePush'){
             when { expression { params.action == 'create' } }
             steps{
